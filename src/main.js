@@ -14,6 +14,7 @@ Vue.filter('filter_date', function (value) {
   return formatting(value);
 })
 Vue.use(ElementUI)
+Vue.prototype.formatting = formatting
 Vue.prototype.$EventBus = new Vue()
 /* eslint-disable no-new */
 new Vue({

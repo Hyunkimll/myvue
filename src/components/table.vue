@@ -8,7 +8,8 @@
       fixed
       :prop="item.value"
       :label="item.name"
-      :width="item.width">
+      :width="item.width"
+      :formatter="formatter">
     </el-table-column>
       <slot name="myslot">
       </slot>
@@ -21,6 +22,11 @@
     methods: {
       handleClick(row) {
         console.log(row);
+      },
+      formatter(row,column,cellValue,index){
+        row.date = this.formatting(row.date);
+        console.log(row,cellValue,index,'11')
+        return cellValue;
       }
     },
     props:["tableData","header","flag"],

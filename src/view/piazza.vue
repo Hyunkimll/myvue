@@ -1,11 +1,15 @@
 <template>
 <div class="all">
     <div class="top">
-      <div style="margin-bottom: 16px;display: flex;align-items: center;">
+      <div style="margin-bottom: 16px;display: flex;align-items: center;justify-content: space-between;">
         <checkbox @handleChange="handleChange" :citie="cities" size="mini" :checkboxGroup1="checkboxGroup">
         <template slot="check">位置</template>
         </checkbox>
+        <Date @pick="pick1">
+        <template slot="date">时间</template>
+        </Date>
         </div>
+        
     </div>
   <div class="bottom">
   <Piazza :header="header" :tableData="tableData">
@@ -37,6 +41,7 @@ import axios from 'axios'
 import Piazza from '../components/table.vue'
 import pagination from '../components/pagination.vue'
 import Checkbox from '../components/checkbox.vue'
+import Date from '../components/Date.vue'
 export default {
     data(){
         return{
@@ -77,12 +82,14 @@ export default {
     methods: {
       handleChange(val){
       this.parmas.areaId = val;
+        this.parmas.page_size = 10;
+        this.parmas.page_num = 1;
       this.list(this.parmas)
       console.log(val,"val1")
      },
       handleClick(row) {
         console.log(row);
-        this.$router.push('/details')
+        this.$router.push({path:'/details',query:{id:row.id,uid:row.uid}})
       },
       sizeChange1(val){
         this.parmas.page_size = val
@@ -109,12 +116,31 @@ export default {
       console.log(err)
       this.tableData = []
     })
+      },
+      pick1(val){
+      if(val){
+      this.parmas.startTime = this.formatting(val[0]);
+      this.parmas.endTime = this.formatting(val[1]);
+      this.parmas.page_size = 10;
+        this.parmas.page_num = 1;
+      this.list(this.parmas)
+      }else{
+        this.parmas.page_size = 10;
+        this.parmas.page_num = 1;
+      this.parmas.startTime = null;
+      this.parmas.endTime = null;
+      this.list(this.parmas)
       }
+      
+      console.log(val,"val")
+
+    },
     },
     components:{
         Piazza,
         pagination,
-        Checkbox
+        Checkbox,
+        Date
     },
     mounted(){
         this.parmas.page_num = 1;

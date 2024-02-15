@@ -5,7 +5,7 @@
         <img class="avatar" :src="item.fromAvatar" width="36" height="36"/>
         <div class="right">
           <div class="name">{{item.fromName}}</div>
-          <div class="date">{{item.date}}</div>
+          <div class="date">{{item.date | filter_date}}</div>
         </div>
       </div>
       <div class="content">{{item.content}}</div>
@@ -20,32 +20,28 @@
         </span>
       </div>
       <div class="reply">
-        <div class="item" v-for="reply in item.reply">
+        <div class="item" v-for="reply in item.children">
           <div class="reply-content">
             <span class="from-name">{{reply.fromName}}</span><span>: </span>
             <span class="to-name">@{{reply.toName}}</span>
             <span>{{reply.content}}</span>
           </div>
           <div class="reply-bottom">
-            <span>{{reply.date}}</span>
+            <span>{{reply.date | filter_date}}</span>
             <span class="reply-text" @click="showCommentInput(item, reply)">
               <i class="iconfont icon-comment"></i>
               <span>回复</span>
             </span>
           </div>
         </div>
-        <div class="write-reply" v-if="item.reply.length > 0" @click="showCommentInput(item)">
-          <i class="el-icon-edit"></i>
-          <span class="add-comment">添加新评论</span>
-        </div>
         <transition name="fade">
           <div class="input-wrapper" v-if="showItemId === item.id">
             <el-input class="gray-bg-input"
-                      v-model="inputComment"
+                      v-model="inputCommentA"
                       type="textarea"
                       :rows="3"
                       autofocus
-                      placeholder="写下你的评论">
+                      :placeholder="inputComment">
             </el-input>
             <div class="btn-control">
               <span class="cancel" @click="cancel">取消</span>
@@ -54,6 +50,31 @@
           </div>
         </transition>
       </div>
+    </div>
+    
+    <div class="comment">
+      <div class="reply">
+      <div class="write-reply">
+          <i class="el-icon-edit"></i>
+          <span class="add-comment" @click="showCommentInput()">添加新评论</span>
+    </div>
+ <transition name="fade">
+          <div class="input-wrapper" v-if="flag">
+            <el-input class="gray-bg-input"
+                      v-model="inputCommentA"
+                      type="textarea"
+                      :rows="3"
+                      autofocus
+                      :placeholder="inputComment">
+            </el-input>
+            <div class="btn-control">
+              <span class="cancel" @click="cancel">取消</span>
+              <el-button class="btn" type="success" round @click="commitComment">确定</el-button>
+            </div>
+          </div>
+        </transition>
+      </div>
+
     </div>
   </div>
 </template>
@@ -73,7 +94,11 @@
     data() {
       return {
         inputComment: '',
-        showItemId: ''
+        showItemId: '',
+        flag:false,
+        input:1,
+        data:'',
+        inputCommentA:''
       }
     },
     computed: {},
@@ -82,17 +107,8 @@
        * 点赞
        */
       likeClick(item) {
-        if (item.isLike === null) {
-          Vue.$set(item, "isLike", true);
-          item.likeNum++
-        } else {
-          if (item.isLike) {
-            item.likeNum--
-          } else {
-            item.likeNum++
-          }
-          item.isLike = !item.isLike;
-        }
+        this.$emit('likenum',item);
+        console.log(item)
       },
 
       /**
@@ -100,12 +116,14 @@
        */
       cancel() {
         this.showItemId = ''
+        this.flag = false
       },
 
       /**
        * 提交评论
        */
       commitComment() {
+        this.$emit("content",{inputComment:this.inputCommentA,input:this.input,data:this.data})
         console.log(this.inputComment);
       },
 
@@ -115,16 +133,30 @@
        * reply: 当前回复的评论
        */
       showCommentInput(item, reply) {
+        console.log(item)
         if (reply) {
-          this.inputComment = "@" + reply.fromName + " "
-        } else {
-          this.inputComment = ''
+          this.inputComment = "@" + reply.fromName
+          this.showItemId = item.id
+          this.flag = false
+          this.input = 1
+        this.data = reply;
+        } else if(item){
+          this.inputComment = "@" +  item.fromName
+          this.showItemId = item.id
+          this.flag = false
+          this.input = 2
+        this.data = item;
+        } else{
+          this.inputComment = '写下你的评论'
+          this.flag = true
+          this.showItemId = ""
+          this.input = 3
+          this.data = ''
         }
-        this.showItemId = item.id
       }
     },
-    created() {
-      console.log(this.comments)
+    mounted() {
+      console.log(this.comments,'aa')
     }
   }
 </script>

@@ -1,4 +1,5 @@
 export function formatting(time){
+    console.log('调用了')
     let timeA = new Date(time).getTime()
     var time = new Date(timeA);
     var y = time.getFullYear();

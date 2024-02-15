@@ -53,7 +53,7 @@ export default {
           const bpoint = new BMap.Point(item.lng,item.lat);
           const marker = new BMap.Marker(bpoint,{icon:myIcon2});
           map.addOverlay(marker)
-          var content = `<div><p>${item.ctitle}</p><p class='text'>${item.cparagraph}</p><p>${item.date}</p></div>`
+          var content = `<div><p>${item.ctitle}</p><p class='text'>${item.cparagraph}</p><p>${this.formatting(item.date)}</p></div>`
           var infoWindow = new BMap.InfoWindow(content,opts)
           console.log(item)
           marker.addEventListener("click", function(e){   //点击事件  

@@ -49,6 +49,7 @@ data() {
     },
     methods:{
         handleStartChange(val){
+          console.log(val)
             this.$emit('pick',val)
         }
     }

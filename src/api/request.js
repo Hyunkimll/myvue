@@ -9,11 +9,24 @@ export function check_get(parameter){
     return axios.get('/apis/data/check',{ params : parameter })
 }
 export function details_get(parameter){
-    return axios.get('/data/details',parameter)
+    return axios.get('/apis/detail/details',{ params : parameter })
 }
 export function comment_get(parameter){
-    return axios.get('/data/comment',parameter)
+    return axios.get('/apis/detail/comment',{ params : parameter })
 }
+export function like_post(parameter){
+  return axios.post('/apis/detail/like',parameter)
+}
+export function notlike_post(parameter){
+  return axios.post('/apis/detail/notlike',parameter)
+}
+export function content_post(parameter){
+  return axios.post('/apis/detail/content',parameter)
+}
+export function Replycontent_post(parameter){
+  return axios.post('/apis/detail/replycontent',parameter)
+}
+
 
 //设置响应拦截器
 axios.interceptors.response.use(res => {

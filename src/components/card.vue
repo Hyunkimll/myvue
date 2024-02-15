@@ -6,7 +6,7 @@
       <div class="cards">
       <img :src="o.img" class="image">
         <div class="bottom clearfix">
-        <span class="bt bc" @click="handle">{{o.ctitle}}</span>
+        <span class="bt bc" :data-uid="o.uid" :data-id="o.id" @click="handle($event)">{{o.ctitle}}</span>
         <span class="text" :title="o.cparagraph">{{o.cparagraph}}</span>
         <span class="bt" :data-lng="o.lng" :data-lat="o.lat" @click="handleClick($event)">位置:{{o.adress}}</span>
         <time class="time">{{o.date | filter_date}}</time>
@@ -34,8 +34,9 @@ data() {
       console.log('11',event.currentTarget.getAttribute('data-lng'))
       this.$EventBus.$emit('point',(event.currentTarget.getAttribute('data-lng')+','+event.currentTarget.getAttribute('data-lat')))
     },
-    handle(){
-      this.$router.push('/details')
+    handle(event){
+      console.log(event,event.currentTarget.getAttribute('data-uid'))
+      this.$router.push({path:'/details',query:{id:event.currentTarget.getAttribute('data-id'),uid:event.currentTarget.getAttribute('data-uid')}})
     }
   }
 }

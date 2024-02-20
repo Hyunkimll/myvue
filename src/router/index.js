@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import area from '@/view/home'
 import details from '@/view/details'
 import piazza from '@/view/piazza'
+
 Vue.use(Router)
 
 export default new Router({
@@ -21,6 +22,11 @@ export default new Router({
       path: '/piazza',
       name: 'piazza',
       component : piazza
+    },
+    {
+      path:'/screen',
+      name:'screen',
+      component : () => import("@/view/screen")
     }
   ]
 })

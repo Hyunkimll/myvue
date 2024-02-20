@@ -7,6 +7,8 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import './common/css/base.css'
 import {formatting} from '@/api/formatting'
+import * as echarts from 'echarts';
+import * as echarts4 from 'echarts4';
 // import './mockjs/index'
 // import BMap from 'BMap' 
 Vue.config.productionTip = false
@@ -15,6 +17,8 @@ Vue.filter('filter_date', function (value) {
 })
 Vue.use(ElementUI)
 Vue.prototype.formatting = formatting
+Vue.prototype.$echarts = echarts
+Vue.prototype.$echarts4 = echarts4
 Vue.prototype.$EventBus = new Vue()
 /* eslint-disable no-new */
 new Vue({

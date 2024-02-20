@@ -33,7 +33,7 @@
         <i class="el-icon-location-outline"></i>
         地址
       </template>
-      {{basic.adress}}
+      {{basic.area_name}}
     </el-descriptions-item>
     <el-descriptions-item>
       <template slot="label">

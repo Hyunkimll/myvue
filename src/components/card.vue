@@ -8,7 +8,7 @@
         <div class="bottom clearfix">
         <span class="bt bc" :data-uid="o.uid" :data-id="o.id" @click="handle($event)">{{o.ctitle}}</span>
         <span class="text" :title="o.cparagraph">{{o.cparagraph}}</span>
-        <span class="bt" :data-lng="o.lng" :data-lat="o.lat" @click="handleClick($event)">位置:{{o.adress}}</span>
+        <span class="bt" :data-lng="o.lng" :data-lat="o.lat" @click="handleClick($event)">位置:{{o.area_name}}</span>
         <time class="time">{{o.date | filter_date}}</time>
         </div>
       </div>

@@ -4,6 +4,7 @@
   text-color="#fff" active-text-color="#ffd04b" router :default-active="$route.path" class="el-menu-demo" mode="horizontal" @select="handleSelect">
   <el-menu-item index="/">我的发布</el-menu-item>
   <el-menu-item index="/piazza">广场</el-menu-item>
+  <el-menu-item index="/screen">大屏</el-menu-item>
     </el-menu>
     <div class="output">
     <router-view/>

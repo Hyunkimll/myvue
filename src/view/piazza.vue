@@ -58,7 +58,7 @@ export default {
             },
             {
                 name:'地址',
-                value:'adress',
+                value:'area_name',
                 width:''
             },
             {

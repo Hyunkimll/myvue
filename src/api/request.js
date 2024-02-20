@@ -26,6 +26,9 @@ export function content_post(parameter){
 export function Replycontent_post(parameter){
   return axios.post('/apis/detail/replycontent',parameter)
 }
+export function screen_get(parameter){
+  return axios.get('/apis/screen',{ params : parameter })
+}
 
 
 //设置响应拦截器

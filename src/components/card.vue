@@ -36,7 +36,7 @@ data() {
     },
     handle(event){
       console.log(event,event.currentTarget.getAttribute('data-uid'))
-      this.$router.push({path:'/details',query:{id:event.currentTarget.getAttribute('data-id'),uid:event.currentTarget.getAttribute('data-uid')}})
+      this.$router.push({path:'/page/details',query:{id:event.currentTarget.getAttribute('data-id'),uid:event.currentTarget.getAttribute('data-uid')}})
     }
   }
 }

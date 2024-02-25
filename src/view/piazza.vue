@@ -89,7 +89,7 @@ export default {
      },
       handleClick(row) {
         console.log(row);
-        this.$router.push({path:'/details',query:{id:row.id,uid:row.uid}})
+        this.$router.push({path:'/page/details',query:{id:row.id,uid:row.uid}})
       },
       sizeChange1(val){
         this.parmas.page_size = val

@@ -1,15 +1,6 @@
 <template>
   <div id="app">
-    <el-menu background-color="#545c64"
-  text-color="#fff" active-text-color="#ffd04b" router :default-active="$route.path" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-  <el-menu-item index="/">我的发布</el-menu-item>
-  <el-menu-item index="/piazza">广场</el-menu-item>
-  <el-menu-item index="/screen">大屏</el-menu-item>
-  <el-menu-item v-if="!isLogin" index="/login" >登录</el-menu-item>
-    </el-menu>
-    <div class="output">
     <router-view/>
-    </div>
   </div>
 </template>
 
@@ -17,12 +8,12 @@
 export default {
   name: 'App',
   data(){
-    const token = localStorage.getItem("access_token");
-    const username = localStorage.getItem("username");
-    return{
-      activeIndex:'/',
-      isLogin: !!username && !!token
-    }
+    // const token = localStorage.getItem("access_token");
+    // const username = localStorage.getItem("username");
+    // return{
+    //   activeIndex:'/',
+    //   isLogin: !!username && !!token
+    // }
   },
   methods:{
     handleSelect(key, keyPath) {
@@ -38,12 +29,5 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-}
-.el-menu-demo{
-  z-index: 1;
-}
-.output{
-  height: calc(100% - 60.67px);
-  position: relative;
 }
 </style>

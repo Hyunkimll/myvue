@@ -34,6 +34,7 @@
         <p>今日TOP7</p>
       </div>
       <div class="content">
+      <el-empty :image-size="100" v-if="flagC"></el-empty>
       <MyTop id="top"  v-if="flag" :echartsObj="echartObj4" :styleObject="styleObject"></MyTop>
       </div>
     </div>
@@ -59,6 +60,7 @@ export default {
     data(){
         return{
           flag:false,
+          flagC:true,
           styleObject:{
             height: "100%",
             width: "100%"
@@ -291,7 +293,11 @@ echartObj4:{
 
           this.echartObj4.xdata = xdata.slice(0,7)
           this.echartObj4.ydata = ydata.slice(0,7)
-
+          if(xdata.length){
+            this.flagC = false
+          }else{
+            this.flagC = true
+          }
           this.echartObj5 = data
 
           this.flag = true
@@ -299,6 +305,7 @@ echartObj4:{
 
         }
     }).catch(err=>{
+      this.flagC = true
     })
     }
 }

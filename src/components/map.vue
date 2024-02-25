@@ -91,9 +91,10 @@ props:{
       padding: 0, // 提示框浮层内边距，
       formatter: function (params) {
         let showname = params;
+        console.log('params',params)
         return `
                 <div>
-                    <p  style="line-height: 30px; padding: 10px;">文章数:${
+                    <p  style="line-height: 30px; padding: 10px;">${params.name}:${
                       showname.value || "0"
                     }人</p>
               </div>

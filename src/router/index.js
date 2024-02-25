@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import area from '@/view/home'
+import home from '@/view/home'
 import details from '@/view/details'
 import piazza from '@/view/piazza'
 import Login from '@/view/login';
 import SignUp from "@/view/signUp";
+import homepage from "@/view/homepage";
 
 Vue.use(Router)
 
@@ -12,33 +13,45 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'area',
-      component: area
+      redirect: '/page/home',
     },
     {
-      path: '/details',
-      name: 'details',
-      component: details
-    },
-    {
-      path: '/piazza',
-      name: 'piazza',
-      component: piazza
-    },
-    {
-      path: '/screen',
-      name: 'screen',
-      component: () => import("@/view/screen")
+      path: '/page',
+      name: 'homepage',
+      component: () => import("@/view/homepage"),
+      children:[
+        {
+          path: 'home',
+          name: 'home',
+          component: () => import("@/view/home")
+        },
+        {
+          path: 'details',
+          name: 'details',
+          component: () => import("@/view/details")
+        },
+        {
+          path: 'piazza',
+          name: 'piazza',
+          component: () => import("@/view/piazza")
+        },
+        {
+          path: 'screen',
+          name: 'screen',
+          component: () => import("@/view/screen")
+        }
+      ]
     },
     {
       path: "/login",
       name: "Login",
-      component: Login
+      component: () => import("@/view/login")
     },
     {
-      path: "/Sign-up",
+      path: "/SignUp",
       name: "SignUp",
-      component: SignUp
+      component: () => import("@/view/signUp")
     }
   ]
 })
+

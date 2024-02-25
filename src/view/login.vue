@@ -102,7 +102,7 @@ export default {
       }
     },
     async goSignUp() {
-      this.$router.push("/sign-up")
+      this.$router.push("/SignUp")
     }
   },
 };

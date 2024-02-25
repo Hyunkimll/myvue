@@ -1,5 +1,3 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
 import router from './router'
@@ -20,6 +18,22 @@ Vue.prototype.formatting = formatting
 Vue.prototype.$echarts = echarts
 Vue.prototype.$echarts4 = echarts4
 Vue.prototype.$EventBus = new Vue()
+
+//全局前置路由守卫————初始化的时候被调用、每次路由切换之前被调用
+router.beforeEach((to, from, next) => {
+  //如果路由需要跳转
+      //判断 如果school本地存储是qinghuadaxue的时候，可以进去
+      if (localStorage.getItem('access_token')) {
+          next()  //放行
+      } else {
+        if(to.path === '/login'){
+          next()
+        }else{
+          next('/login')
+        }
+      }
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
